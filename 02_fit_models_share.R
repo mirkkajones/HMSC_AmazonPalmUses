@@ -1,20 +1,17 @@
-#################################################################################################################################################
-#Codes associated to the analysis used the paper 
-#"The legacy of human use in Amazonian palm communities along environmental and accessibility gradients". 
-#Global Ecology and Biogeography. In press.
-#Codes by Otso Ovaskainen, Mirkka Jones and Gabriela Zuquim
-#The codes were modified from November 2020 Hmsc course scripts. 
-#Current versions of these training materials are available at https://www.helsinki.fi/en/researchgroups/statistical-ecology/software/hmscCodes
-#see readme file for detail
-##################################################################################################################################################
+# Codes associated with the analyses presented in the paper 
+# "The legacy of human use in Amazonian palm communities along environmental and accessibility gradients". 
+# Global Ecology and Biogeography. In press.
+# Codes by Otso Ovaskainen, Mirkka Jones and Gabriela Zuquim
+# The codes were modified from November 2020 Hmsc course scripts prepared by Otso Ovaskainen, Jari Oksanen and others.
+# Current versions of these training materials are available at https://www.helsinki.fi/en/researchgroups/statistical-ecology/software/hmscCodes
+# see readme file for details
 
 library(Hmsc)
 
 load(file = "unfitted_models.Rdata")
 
-#### WARNING! The next lines can take several weeks or even months to run in a normal computer
-#### For testing the codes purposes we suggest changing the values nchains, samples and thin to 2, 50, 1, respectively
-#### Model fitting with the below settings took almost 2 weeks to run in a supercomputing center
+#### WARNING! Model fitting (next lines) would take many weeks to run on a normal computer (took 2 weeks with the settings below on a supercomputer).
+#### For testing the codes, we hence recommend changing the values of nchains, samples and thin e.g. to 2, 50, 1, respectively
 
 nChains = 4
 samples = 250
