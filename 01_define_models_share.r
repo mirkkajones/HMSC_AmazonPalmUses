@@ -1,16 +1,16 @@
 #################################################################################################################################################
-#Codes associated to the analysis used the paper 
-#"The legacy of human use in Amazonian palm communities along environmental and accessibility gradients". 
-#Global Ecology and Biogeography. In press.
-#Codes by Otso Ovaskainen, Mirkka Jones and Gabriela Zuquim
-#The codes were modified from November 2020 Hmsc course scripts. 
-#Current versions of these training materials are available at https://www.helsinki.fi/en/researchgroups/statistical-ecology/software/hmscCodes
-#see readme file for detail
+# Codes associated with the analyses presented in the paper 
+# "The legacy of human use in Amazonian palm communities along environmental and accessibility gradients". 
+# Global Ecology and Biogeography. In press.
+# Codes by Otso Ovaskainen, Mirkka Jones and Gabriela Zuquim
+# The codes were modified from November 2020 Hmsc course scripts prepared by Otso Ovaskainen, Jari Oksanen and others.
+# Current versions of these training materials are available at https://www.helsinki.fi/en/researchgroups/statistical-ecology/software/hmscCodes
+# see readme file for details
 ##################################################################################################################################################
 
 library(Hmsc)
 load("allData.R") #S, X, Y_Adult, Y_Juvenile, Tr, P
-####For the purpose of the paper CITE, Juvenile data was not used
+#### In the paper CITE, the juvenile data was not used
 
 #### X$HAND_50 has 13 missing values. Exclude these rows from S, X and Y! ####
 
@@ -19,7 +19,6 @@ missingvalues = which(is.na(X$HAND_50))
 S = droplevels(S[-missingvalues,])
 X = droplevels(X[-missingvalues,])
 Y_Adult = Y_Adult[-missingvalues,]
-
 
 # Check for absent (0) or ubiquitous species (1) in the species data matrices.
 range(colMeans(Y_Adult>0))
@@ -38,7 +37,7 @@ Tr_Adult[, 9:10] = apply(Tr_Adult[, 9:10], 2, as.numeric)
 
 TrFormula = ~human_food + material + medicine + use_intensity
 
-#prepare environmetal data
+# prepare environmetal data
 library(vegan)
 pcoa = cmdscale(vegdist(1*(Y_Adult>0), binary = TRUE), k = 3, eig = TRUE)
 pca_clim = prcomp(X[, 2:19], scale = TRUE)
@@ -48,19 +47,21 @@ cortable = round(cor(data.frame(pcoa$points[, 1], pcoa$points[, 2], pcoa$points[
 head(cortable[order(cortable[, 1]), ]);tail(cortable[order(cortable[, 1]), ])
 head(cortable[order(cortable[, 2]), ]);tail(cortable[order(cortable[, 2]), ])
 
-# Based on PCoA correlations, selected two climatic variables quantifying variation in temperature and rainfall, three landsat bands, log(cations), HAND, dist to river and habitat type.
+# Based on PCoA correlations, selected two Chelsa climatic variables quantifying variation in temperature and rainfall for inclusion as fixed effects in 
+# the Hmsc models, as well as three Landsat satellite reflectance bands, log(soil cations), HAND, log(distance to river) and habitat type.
 X = X[, c("Chelsa150_bio3", "Chelsa150_bio15", "Band2_median15", "Band4_median15", "Band7_median15", "logCat", "HAND_50", "DistRivlog10", "hab_type")]
 relevel(X$hab_type, ref = "Terra firma")
 
 XFormula = ~Chelsa150_bio3 + Chelsa150_bio15 + Band2_median15 + Band4_median15 + Band7_median15 + poly(logCat, 2, raw = TRUE) + HAND_50 + DistRivlog10 + hab_type
 
-# All 430 site codes and coordinates are unique. Coded as a spatial random effect.
+# All 430 site codes and coordinates are unique. Coded a spatial random effect.
 studyDesign = data.frame(transect = as.factor(S$Transect))
 
 xy = data.frame(x=S$Longitude,y=S$Latitude)
 rownames(xy) = studyDesign$transect
 rL.transect = HmscRandomLevel(sData = xy, longlat = TRUE)
 
+# Response Y matrix of presence-absence records of the adult palms.
 Ypa_AD = 1*(Y_Adult>0)
 
 #####################################################################
