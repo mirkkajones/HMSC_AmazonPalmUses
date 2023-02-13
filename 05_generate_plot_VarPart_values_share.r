@@ -56,16 +56,15 @@ legend = c("Soil (9.1)","Climate (11.7)","Landsat (4.3)","HAND (0.5)", "Distance
            "Habitat type (3.8)", "Random: transect (4.5)","Unexplained (65.6)")
 
 pdf("Barplot_VP_useintensity.pdf", width = 10, height = 12)
-par(mar = c(3, 10, 1, 1), lwd=0.1)
+par(mar = c(4, 10, 1, 1), lwd=0.1)
 colPlot=c("#FF0000", "#FFAA00", "#00AAFF",  "#0000FF" ,"#00FF00", "#00FFAA", "cornsilk")
 colLegend=c("#FF0000", "#FFAA00", "#00AAFF",  "#0000FF" ,"#00FF00", "#00FFAA"  ,"cornsilk", "white")
 
-barplot(VPuses_to_plot,col = colPlot, las=2, horiz=2, cex.names = 0.8, xlim = c(0,100))
+barplot(VPuses_to_plot,col = colPlot, las=2, horiz=2, cex.names = 0.8, xlim = c(0,100), xlab = "Variance proportion (%)")
 legend("bottomright",
        legend = legend,
        fill = colLegend,
        cex=0.9)
-#Add human use intensity categories 0-7:
 textYcoord = c(4.1, 24, 35, 44, 49, 64.6, 77, 84)
 for(n in 1:8)
 {
