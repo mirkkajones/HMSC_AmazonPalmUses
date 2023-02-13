@@ -1,11 +1,11 @@
 #################################################################################################################################################
-#Codes associated to the analysis used the paper 
-#"The legacy of human use in Amazonian palm communities along environmental and accessibility gradients". 
-#Global Ecology and Biogeography. In press.
-#Codes by Otso Ovaskainen, Mirkka Jones and Gabriela Zuquim
-#The codes were modified from November 2020 Hmsc course scripts. 
-#Current versions of these training materials are available at https://www.helsinki.fi/en/researchgroups/statistical-ecology/software/hmscCodes
-#see readme file for detail
+# Codes associated with the analyses presented in the paper 
+# "The legacy of human use in Amazonian palm communities along environmental and accessibility gradients". 
+# Global Ecology and Biogeography. In press.
+# Codes by Otso Ovaskainen, Mirkka Jones and Gabriela Zuquim
+# The codes were modified from November 2020 Hmsc course scripts prepared by Otso Ovaskainen, Jari Oksanen and others.
+# Current versions of these training materials are available at https://www.helsinki.fi/en/researchgroups/statistical-ecology/software/hmscCodes
+# see readme file for details.
 ##################################################################################################################################################
 
 library(Hmsc)
@@ -15,6 +15,7 @@ library(abind)
 
 load("models_thin_1000_samples_250_chains_4.Rdata")
 m = models[[1]]
+
 covariates = all.vars(m$XFormula)[c(6, 8, 7, 1:5)]
 gradientnames = c("log(Soil cations)", "log(Distance to river)", "HAND", "Min. temp. coldest month", "Precipitation seasonality", "Landsat Band 3", "Landsat Band 4", "Landsat Band 7")
 
