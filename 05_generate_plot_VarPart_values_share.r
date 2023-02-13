@@ -24,12 +24,13 @@ for(k in 1:m$ns)
 
 
 ### Prepare data and plot Variation partitioning results (Fig. 1)
+library(dplyr)
 
 varpart = data.frame(t(VPr$vals))
 ####Sum climatic and landsat variables####
 vpclim = rowSums(varpart[,1:2])
-vpRS<-rowSums(varpart[,3:5])
-varpart<-cbind(varpart$poly.logCat..2..raw...TRUE., vpclim, vpRS, varpart[,-c(1:6)], MF$TjurR2)
+vpRS = rowSums(varpart[,3:5])
+varpart = cbind(varpart[,6], vpclim, vpRS, varpart[,-c(1:6)], MF$TjurR2)
 #Convert values into percentages rather than proportions:
 varpart$Unexplained = 1-MF$TjurR2
 varpart = round(varpart*100,2)
@@ -38,7 +39,7 @@ colnames(varpart) = c("poly_logCat", "Climate", "Landsat", "log.HAND_50", "DistR
 VPuses = cbind(varpart, m$TrData[, c("human_food", "material", "medicine", "use_intensity")])
 VPuses = VPuses[order(VPuses$use_intensity, VPuses$Unexplained),]
 
-write.csv2(VPuses, "VPr_human_uses.csv")
+write.csv2(VPuses, "VP_TjurR2_Human_uses.csv")
 
 VPuses_to_plot<-t(VPuses)[c(1:7),]
 
@@ -47,7 +48,6 @@ round(rowMeans(VPuses_to_plot),1)
 round(mean(VPuses$Unexplained),1)
 
 #####BARPLOT####
-
 # Create legend for barplot
 legend = c("Soil (9.1)","Climate (11.7)","Landsat (4.3)","HAND (0.5)", "Distance to river (0.4)", 
            "Habitat type (3.8)", "Random: transect (4.5)","Unexplained (65.6)")
