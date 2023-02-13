@@ -64,7 +64,13 @@ barplot(VPuses_to_plot,col = colPlot, las=2, horiz=2, cex.names = 0.8, xlim = c(
 legend("bottomright",
        legend = legend,
        fill = colLegend,
-       cex=1)
+       cex=0.9)
+#Add human use intensity categories 0-7:
+textYcoord = c(4.1, 24, 35, 44, 49, 64.6, 77, 84)
+for(n in 1:8)
+{
+  text(70, textYcoord[n], n-1, cex = 1.5) 
+}
 
 dev.off()
 
