@@ -44,7 +44,7 @@ write.csv2(VPuses, "VP_TjurR2_Human_uses.csv")
 
 #####BARPLOT####
 
-#Subset VP columns for plotting:
+#Subset VP values per species for plotting:
 VPuses_to_plot<-t(VPuses)[c(1:7),]
 
 #Check rowMeans for legend:
