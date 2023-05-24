@@ -26,8 +26,8 @@ min(colSums(Y_Adult>0))
 # =0.
 
 #Adult Y and Tr data preparation:
-# Remove rare species (5 or less observations)
-rarespecies = which(colSums(Y_Adult>0)<5)
+# Remove rare species (10 or less observations)
+rarespecies = which(colSums(Y_Adult>0)<10)
 length(rarespecies)
 Y_Adult = Y_Adult[,-rarespecies]
 
