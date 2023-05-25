@@ -49,10 +49,10 @@ head(cortable[order(cortable[, 2]), ]);tail(cortable[order(cortable[, 2]), ])
 
 # Based on PCoA correlations, selected two Chelsa climatic variables quantifying variation in temperature and rainfall for inclusion as fixed effects in 
 # the Hmsc models, as well as three Landsat satellite reflectance bands, log(soil cations), HAND, log(distance to river) and habitat type.
-X = X[, c("Chelsa150_bio3", "Chelsa150_bio15", "Band2_median15", "Band4_median15", "Band7_median15", "logCat", "HAND_50", "DistRivlog10", "hab_type")]
+X = X[, c("Chelsa150_bio6", "Chelsa150_bio15", "Band2_median15", "Band4_median15", "Band7_median15", "logCat", "HAND_50", "DistRivlog10", "hab_type")]
 relevel(X$hab_type, ref = "Terra firma")
 
-XFormula = ~Chelsa150_bio3 + Chelsa150_bio15 + Band2_median15 + Band4_median15 + Band7_median15 + poly(logCat, 2, raw = TRUE) + HAND_50 + DistRivlog10 + hab_type
+XFormula = ~Chelsa150_bio6 + Chelsa150_bio15 + Band3_median15 + Band4_median15 + Band7_median15 + poly(logCat, 2, raw = TRUE) + log.HAND_50 + DistRivlog10 + hab_type2
 
 # All 430 site codes and coordinates are unique. Coded a spatial random effect.
 studyDesign = data.frame(transect = as.factor(S$Transect))
