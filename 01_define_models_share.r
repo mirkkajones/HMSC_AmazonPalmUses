@@ -1,7 +1,7 @@
 #################################################################################################################################################
 # Codes associated with the analyses presented in the paper 
 # "The legacy of human use in Amazonian palm communities along environmental and accessibility gradients". 
-# Global Ecology and Biogeography. In press.
+# Global Ecology and Biogeography. https://onlinelibrary.wiley.com/doi/full/10.1111/geb.13667
 # Codes by Otso Ovaskainen, Mirkka Jones and Gabriela Zuquim
 # The codes were modified from November 2020 Hmsc course scripts prepared by Otso Ovaskainen, Jari Oksanen and others.
 # Current versions of these training materials are available at https://www.helsinki.fi/en/researchgroups/statistical-ecology/software/hmscCodes
@@ -10,15 +10,8 @@
 
 library(Hmsc)
 load("allData.R") #S, X, Y_Adult, Y_Juvenile, Tr, P
-#### In the paper CITE, the juvenile data was not used
-
-#### X$HAND_50 has 13 missing values. Exclude these rows from S, X and Y! ####
-
-X$HAND_50 = as.numeric(as.character(X$HAND_50))
-missingvalues = which(is.na(X$HAND_50))
-S = droplevels(S[-missingvalues,])
-X = droplevels(X[-missingvalues,])
-Y_Adult = Y_Adult[-missingvalues,]
+#### In the paper (citation above), the juvenile data were not used
+rm(Y_Juvenile)
 
 # Check for absent (0) or ubiquitous species (1) in the species data matrices.
 range(colMeans(Y_Adult>0))
