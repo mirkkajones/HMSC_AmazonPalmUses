@@ -28,7 +28,7 @@ Tr_Adult = Tr_Adult[, 1:8]
 
 TrFormula = ~human_food + material + medicine + use_intensity
 
-# prepare environmetal data
+# prepare environmetal data, simplify habitat type into two categories, log-transform height above nearest drainage (HAND)
 X$hab_type2 = as.character(X$hab_type)
 X$hab_type2[X$hab_type2=="White sand"] = "Terra firma"
 X$hab_type2 = factor(X$hab_type2)
