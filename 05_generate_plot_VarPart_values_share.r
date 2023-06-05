@@ -29,7 +29,7 @@ varpart = data.frame(t(VP$vals))
 vpclim = rowSums(varpart[,1:2])
 vplandsat = rowSums(varpart[,3:5])
 varpart = cbind(varpart[,6], vpclim, vplandsat, varpart[,-c(1:6)], MF$TjurR2)
-colnames(varpart) = c("poly_logCat", "Climate", "Landsat", "log.HAND_50", "DistRivlog10", "hab_type2", "Random_transect", "TjurR2", "Unexplained")
+colnames(varpart) = c("poly_logCat", "Climate", "Landsat", "log.HAND_50", "DistRivlog10", "hab_type2", "Random_transect", "TjurR2")
 varpart$Unexplained = 1-MF$TjurR2
 
 #Convert values into percentages rather than proportions:
